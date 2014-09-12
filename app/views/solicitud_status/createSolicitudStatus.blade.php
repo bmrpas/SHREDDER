@@ -69,7 +69,7 @@
 
                 <div id="fk_empresa" style="display:none;">
                
-                
+               
 
                 @foreach ($fk_solicitud_empresas as $solicitud_empresa)
 
@@ -79,7 +79,7 @@
 
                 
                 @endforeach
-                {{$fk_solicitud_empresas->links()}}
+                {{$fk_solicitud_empresas->links()}}  
 
 
                 </div>                

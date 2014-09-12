@@ -28,7 +28,9 @@ class SolicitudStatusController extends BaseController {
 	}
 
 	public function mostrar_status(){
+		//$fk_solicitud_personas = Solicitud_Informacion::where('pk_fk_empresa_persona','=',NULL);
 		$solicitud_status = Status_Solicitud::orderBy('solicitud_status_fecha')->orderBy('pk_fk_solicitud_informacion')->paginate(10);
+		//$solicitud_status_empresa = Status_Solicitud::where('solicitud_informacion.pk_fk_empresa_persona','=','empresa_persona.id')->paginate(10);
 
 		return View::make('solicitud_status.listaSolicitudStatus', array('solicitud_status' => $solicitud_status));
 	}

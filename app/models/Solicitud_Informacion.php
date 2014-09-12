@@ -21,7 +21,8 @@ Class Solicitud_Informacion Extends Eloquent{
 	}
 
 	public function getDatosPersonaSolicitudAttribute(){
-		return 'ID Solicitud: '.$this->id.' - '.' Solicitante: '.$this->persona->full_name.' - '.' Fecha: '.$this->solicitud_info_fecha;
+
+			return 'ID Solicitud: '.$this->id.' - '.' Solicitante: '.$this->persona->full_name.' - '.' Fecha: '.$this->solicitud_info_fecha;
 	}
 
 	public function getDatosEmpresaSolicitudAttribute(){

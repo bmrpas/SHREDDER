@@ -82,7 +82,7 @@
             <br/><br/>
             
 
-            <div  class="col-md-3"> {{ HTML::link('tres', $solicitud_empresa->SHREDDER.' | '.$solicitud->status->status_nombre , array('id' => 'nam_id'))}}</div>
+            <div  class="col-md-3"> {{ HTML::link('tres', $solicitud_empresa->solicitud->id.' | '.$solicitud_empresa->status->status_nombre , array('id' => 'nam_id'))}}</div>
 
            
             <div class="col-md-3">

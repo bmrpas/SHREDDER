@@ -9,6 +9,7 @@
     <title>Starter Template for Bootstrap</title>
     {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
     {{ HTML::style('assets/css/starter-template.css', array('media' => 'screen')) }}
+    <!--{{ HTML::style('assets/css/dashboard.css', array('media' => 'screen')) }}-->
 
     <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!--{{ HTML::script('assets/js/ie-emulation-modes-warning.js') }}-->
@@ -51,7 +52,7 @@
       <div class="starter-template">
         <!--h1>Bootstrap starter template</h1>
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p-->
-
+          
 
           @yield('index')
           @yield('contenido')

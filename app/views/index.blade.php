@@ -142,6 +142,10 @@
                       <td>{{ HTML::link('telefono', 'Teléfonos')}}</td>
                       <td>ipsum dolor sit amet, consectetur </td>
                     </tr>
+                    <tr>
+                      <td>{{ HTML::link($sitios->sitio_nombre, $sitios->sitio_nombre)}}</td>
+                      <td>ipsum dolor sit amet, consectetur </td>
+                    </tr>
                    
                   </tbody>
                 </table>

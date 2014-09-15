@@ -4,7 +4,8 @@ class WebController extends BaseController{
 
 	public function index()
 	{
-		return View::make('index');
+		$sitios = Sitios::first();
+		return View::make('index',array('sitios' => $sitios));
 	}
 
 	public function profesionIndex(){

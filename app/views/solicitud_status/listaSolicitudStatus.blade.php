@@ -36,12 +36,13 @@
 <div id="fk_persona" style="display:show;">
 
 @foreach ($solicitud_status as $solicitud)
-<div  class="row">
-            <br/><br/>
+
+            
             
 
-
-
+              @if ($solicitud->solicitud->pk_fk_persona)
+<div  class="row">
+  <br/><br/>
 
             <div  class="col-md-3"> {{ HTML::link('tres', $solicitud->solicitud->datos_persona_solicitud.' | '.$solicitud->status->status_nombre , array('id' => 'nam_id'))}}</div>
 
@@ -66,10 +67,14 @@
               {{ Form::close() }}
             </div>
 
+          </div>
+
+            @endif
+
 
 
                 
-          </div>
+          
 @endforeach
 
 {{$solicitud_status->links()}}
@@ -78,11 +83,13 @@
 <div id="fk_empresa" style="display:none;" >
 
 @foreach ($solicitud_status as $solicitud_empresa)
+
+            
+              @if ($solicitud_empresa->solicitud->pk_fk_empresa_persona)
+
 <div  class="row">
             <br/><br/>
-            
-
-            <div  class="col-md-3"> {{ HTML::link('tres', $solicitud_empresa->solicitud->id.' | '.$solicitud_empresa->status->status_nombre , array('id' => 'nam_id'))}}</div>
+            <div  class="col-md-3"> {{ HTML::link('tres', $solicitud_empresa->solicitud->datos_empresa_solicitud.' | '.$solicitud_empresa->status->status_nombre , array('id' => 'nam_id'))}}</div>
 
            
             <div class="col-md-3">
@@ -93,7 +100,7 @@
 
             <div class="col-md-3">
               {{ Form::open(array('url' => 'solicitud_info/editar', 'method' => 'GET'))}}
-              {{ Form::hidden('idedit', $solicitud_empresa->id) }}<!--Aquí pasas el valor del ID que se realiza por la consulta a BD-->
+              {{ Form::hidden('idedit', $solicitud_empresa->id) }}
               {{ Form::submit('Editar', array('class' => 'btn btn-Editar')) }}
               {{ Form::close() }}
             </div>
@@ -105,10 +112,16 @@
               {{ Form::close() }}
             </div>
 
+            </div>
 
+            
+
+            
+
+            @endif
 
                 
-          </div>
+          
 @endforeach
 
 {{$solicitud_status->links()}}

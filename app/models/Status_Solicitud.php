@@ -12,4 +12,10 @@ Class Status_Solicitud Extends Eloquent{
 		return $this->belongsTo('Solicitud_Informacion','pk_fk_solicitud_informacion');
 	}
 
+	 public function scopePerson($query)
+    {
+  
+        return $query->where($this->solicitud->id,'=',NULL);
+    }
+
 }

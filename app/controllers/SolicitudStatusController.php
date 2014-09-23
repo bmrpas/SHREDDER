@@ -44,7 +44,7 @@ class SolicitudStatusController extends BaseController {
 		    //$solicitud_status = array($solicitud_status);
 
 		    		
-		    		$query = Status_Solicitud::where('pk_fk_solicitud_informacion','=',$solicitud_status->si);
+		    		$query = Status_Solicitud::where('pk_fk_solicitud_informacion','=',$solicitud_status);
 		    		
 		    
 

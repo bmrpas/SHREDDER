@@ -15,14 +15,28 @@
 
           </p>
 
+<script type="text/javascript">
+  function solicitanteOnChange(sel) {
+      if (sel.value === "persona"){
+           $("#fk_persona").show();
+           $("#fk_empresa").hide();
 
-@foreach ($solicitud_status as $q)
+      }else{
 
-{{$q}}
-</br>
+           $("#fk_persona").hide();
+           $("#fk_empresa").show();
 
-</br>
-@endforeach
+      }
+}
+</script>
+          
+          @foreach ($solicitud_status as $q)
+               {{$q}}
+             </br>
+               @endforeach
+
+
+
 
       </div>
 @stop

@@ -11,7 +11,7 @@ class SolicitudStatusController extends BaseController {
 
 	public function add_status(){
 		$inputs = Input::all();
-		$today = Carbon::now();
+		$today = Carbon::today()->toDateString();	
 
 			$solicitud_status = new Status_Solicitud;
 			$solicitud_status->solicitud_status_fecha = $today;
@@ -28,6 +28,7 @@ class SolicitudStatusController extends BaseController {
 	}
 
 	public function mostrar_status(){
+
 
 		//$solicitud_status = Status_Solicitud::all()->max('solicitud_status_fecha');
 
@@ -69,15 +70,20 @@ WHERE te.pk_fk_solicitud_informacion = t.pk_fk_solicitud_informacion AND te.soli
 */
 
 		return View::make('solicitud_status.listaSolicitudStatus', array('solicitud_status' => $solicitud_status, 'query'=>$query));
+
+		$solicitud_status = Status_Solicitud::orderBy('pk_fk_solicitud_informacion')->paginate(10);
+
+
+		return View::make('solicitud_status.listaSolicitudStatus', array('solicitud_status' => $solicitud_status));
+
 	}
 
 	public function editar_empresa_actividad(){
-		$pk_fk_status = Status::orderBy('status_nombre','ASC')->get()->lists('status_nombre','id');	
-		$fk_solicitud_personas = Solicitud_Informacion::where('pk_fk_empresa_persona','=',NULL)->paginate(10);
-		$fk_solicitud_empresas = Solicitud_Informacion::where('pk_fk_persona','=',NULL)->paginate(10);
+		$fk_empresa = Empresa::get()->lists('empresa_nombre','id');
+		$fk_actividad = Actividad::get()->lists('actividad_nombre','id');	
 		$inputs = Input::get('idedit');
-		$solicitud_status = Status_Solicitud::find($inputs);
-		if($solicitud_status)
+		$empresa_actividad = Empresa_Actividad::find($inputs);
+		if($empresa_actividad)
 		return View::make('empresa_actividad.createEmpresaActividad',array('fk_empresa'=>$fk_empresa, 'fk_actividad'=>$fk_actividad, 'empresa_actividad'=>$empresa_actividad));
 	else
 		return Redirect::to('empresa_actividad');

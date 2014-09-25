@@ -18,4 +18,17 @@ Class Status_Solicitud Extends Eloquent{
         return $query->where($this->solicitud->id,'=',NULL);
     }
 
+    /*public static function getUsersThat ()
+  {
+    $mRows = DB:query( 'SELECT user.* FROM state, user WHERE state.current = "blah" AND user.state_id = state.id;' );
+    // Convert results to a user::Eloquent model
+    $mUsers = array();
+    foreach( $mRows as $mRow )
+    {
+      $mR = ( array ) $mRow;
+      $mUsers[] = new user( $mR, true );
+    }
+    return $mUsers;
+  }*/
+
 }

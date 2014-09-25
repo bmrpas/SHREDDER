@@ -11,7 +11,7 @@ class SolicitudStatusController extends BaseController {
 
 	public function add_status(){
 		$inputs = Input::all();
-		$today = Carbon::today()->toDateString();	
+		$today = Carbon::now();	
 
 			$solicitud_status = new Status_Solicitud;
 			$solicitud_status->solicitud_status_fecha = $today;
@@ -44,10 +44,24 @@ class SolicitudStatusController extends BaseController {
 		    $solicitud_status = Status_Solicitud::select(array(DB::raw('max(solicitud_status_fecha) as fecha'),'pk_fk_solicitud_informacion as si'))->groupBy('pk_fk_solicitud_informacion')->get(); // Eloquent Builder instance
 		    //$solicitud_status = array($solicitud_status);
 
-		    		
-		    		$query = Status_Solicitud::where('pk_fk_solicitud_informacion','=',$solicitud_status);
-		    		
-		    
+
+
+		    		$raw_result = DB::select('SELECT te.* FROM (select max(ss.solicitud_status_fecha)as FECHA , 
+		    			ss.pk_fk_solicitud_informacion from solicitud_status as ss, solicitud_informacion as si , 
+		    			status as s where ss.pk_fk_solicitud_informacion = si.id and ss.pk_fk_status = s.id group by ss.pk_fk_solicitud_informacion) AS t, solicitud_status AS te
+		    		WHERE te.pk_fk_solicitud_informacion = t.pk_fk_solicitud_informacion AND te.solicitud_status_fecha = t.FECHA
+		    		ORDER BY te.solicitud_status_fecha desc;');
+					
+					$collection = new \Illuminate\Database\Eloquent\Collection();
+						foreach ($raw_result as $raw_obj)
+						{
+						     $model = new Status_Solicitud();
+						     $collection->add($model->newFromBuilder($raw_obj));
+						}
+
+
+
+						//$new = Status_Solicitud::where('id','=',$collection->id);
 
 /*				$count = DB::table( DB::raw("({$sub->toSql()}) as sub") )
 				    ->mergeBindings($sub->getQuery()) // you need to get underlying Query Builder
@@ -69,12 +83,8 @@ group by ss.pk_fk_solicitud_informacion) AS t, solicitud_status AS te
 WHERE te.pk_fk_solicitud_informacion = t.pk_fk_solicitud_informacion AND te.solicitud_status_fecha = t.FECHA
 */
 
-		return View::make('solicitud_status.listaSolicitudStatus', array('solicitud_status' => $solicitud_status, 'query'=>$query));
 
-		$solicitud_status = Status_Solicitud::orderBy('pk_fk_solicitud_informacion')->paginate(10);
-
-
-		return View::make('solicitud_status.listaSolicitudStatus', array('solicitud_status' => $solicitud_status));
+		return View::make('solicitud_status.listaSolicitudStatus', array('collection'=>$collection));
 
 	}
 

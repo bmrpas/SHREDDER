@@ -13,7 +13,7 @@ Class Solicitud_Informacion Extends Eloquent{
 	}
 
 	public function solicitud_status(){
-		return $this->belongsToMany('Status', 'Status_Solicitud', 'pk_fk_solicitud_informacion', 'pk_fk_status')->withPivot('solicitud_status_fecha');
+		return $this->hasMany('Status', 'Status_Solicitud', 'pk_fk_solicitud_informacion', 'pk_fk_status')->withPivot('solicitud_status_fecha');
 	}
 
 	public function forma_busqueda(){

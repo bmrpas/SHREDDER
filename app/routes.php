@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'WebController@index');
+Route::get('/', 'UsuarioController@get_login');
+Route::post('/','UsuarioController@post_login');
+Route::get('/index', 'WebController@index');
 
 Route::get('profesion', 'ProfesionController@mostrar_profesiones');
 Route::get('profesion/crear', 'ProfesionController@get_profesion');
@@ -84,6 +86,7 @@ Route::post('persona/editar','PersonaController@update_persona');
 Route::post('persona/eliminar','PersonaController@borrar_persona');
 
 Route::get('usuario','UsuarioController@mostrar_usuario');
+Route::get('usuario/login','UsuarioController@login');
 Route::get('usuario/crear','UsuarioController@get_usuario');
 Route::post('usuario/crear','UsuarioController@add_usuario');
 Route::get('usuario/editar','UsuarioController@editar_usuario');

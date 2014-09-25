@@ -44,6 +44,7 @@ return array(
     'Rol_Accion' => $baseDir . '/app/models/Rol_Accion.php',
     'Rol_Usuario' => $baseDir . '/app/models/Rol_Usuario.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
+    'Sitios' => $baseDir . '/app/models/Sitios.php',
     'SolicitudAfiliacionController' => $baseDir . '/app/controllers/SolicitudAfiliacionController.php',
     'SolicitudInformacionController' => $baseDir . '/app/controllers/SolicitudInformacionController.php',
     'SolicitudStatusController' => $baseDir . '/app/controllers/SolicitudStatusController.php',

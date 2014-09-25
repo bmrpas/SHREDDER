@@ -8,15 +8,4 @@ class WebController extends BaseController{
 		return View::make('index',array('sitios' => $sitios));
 	}
 
-	public function profesionIndex(){
-		return View::make('profesionIndex');
-	}
-
-	public function tres(){
-		return View::make('tres');
-	}
-
-	public function profesion(){
-		return View::make('tres/profesion');
-	}
 }

@@ -2,6 +2,55 @@
 
 class UsuarioController extends BaseController {
 
+	public function get_login(){
+		if (Usuario::isLogged())
+			return Redirect::to('/index');
+		else
+			return View::make('usuario.loginUsuario');
+	}
+
+	public function post_login(){
+		$input = Input::all();
+
+		$rules = array(
+			'usuario_login' => 'required|exists:usuario,usuario_login',
+			'usuario_password' => 'required:usuario,usuario_password_password',
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$usuario_login = Input::get('usuario_login');
+			$usuario_password = Input::get('usuario_password');
+
+			if($usuario = Usuario::where('usuario_login', '=', $usuario_login)->first())
+			{
+				if(Hash::check($usuario_password, $usuario->usuario_password))
+				{
+					Session::put('usuario_id', $usuario->id);
+					Session::put('usuario_login', $usuario->usuario_login);
+					//Session::put('user_type', $user->type);
+					return Redirect::to('/index');
+				}
+				else
+				{
+					return Redirect::to('/');
+				}
+			}
+			else
+			{
+				return Redirect::to('/');
+			}
+	}
+}
+
+
+
 	public function get_usuario(){
 		$fk_persona = Person::lists('persona_cid', 'id');
 		return View::make('usuario.createUsuario',array('fk_persona' => $fk_persona));
